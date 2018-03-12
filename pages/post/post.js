@@ -35,9 +35,9 @@ Page({
         //         }
         //     ];
 
-            this.setData({
-                post_key:postsData.postList
-            });
+        this.setData({
+            post_key: postsData.postList
+        });
     },
     onReady: function () {
         // 生命周期函数--监听页面初次渲染完成
@@ -64,5 +64,13 @@ Page({
             desc: 'desc', // 分享描述
             path: 'path' // 分享路径
         }
+    },
+    onPostTap: function (event) {
+        var postid = event.currentTarget.dataset.postid;
+
+        wx.navigateTo({
+            url: 'post-detail/post-detail',
+        })
+
     }
 })
