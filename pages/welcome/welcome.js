@@ -5,6 +5,6 @@ Page({
         // });
         wx.redirectTo({
             url: '/pages/post/post',
-        })
+        });
     }
 });
