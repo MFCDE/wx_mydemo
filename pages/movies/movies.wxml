@@ -1,0 +1,7 @@
+<import src="move-list-template/move-list-template.wxml" />
+
+<view>
+    <template is="moveListTemplate" data="" />
+    <template is="moveListTemplate" data="" />
+    <template is="moveListTemplate" data="" />
+</view>

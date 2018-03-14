@@ -1,0 +1,9 @@
+<import src="../stars-template/stars-template.wxml"/>
+
+<template name="moveTemplate">
+    <view>
+        <image src="/images/yourname.jpg"></image>
+        <text></text>
+        <template is="starsTemplate" data=""/>
+    </view>
+</template>
