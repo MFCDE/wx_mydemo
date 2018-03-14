@@ -69,7 +69,33 @@ Page({
         var postid = event.currentTarget.dataset.postid;
 
         wx.navigateTo({
+            //相对路径
             url: 'post-detail/post-detail?postid=' + postid,
         })
+    },
+    // onSwiperItemTap:function (event) {  
+    //     var postid = event.currentTarget.dataset.postid;
+
+    //     wx.navigateTo({
+    //         //绝对路径
+    //         url:'/pages/post/post-detail/post-detail?postid=' + postid
+    //     });
+    // }
+    onSwiperTap: function (event) {
+        //错误写法，应该用target不能用currentTarget，这里指的是当前点击的组件,currentTarget是事件捕获的组件
+        //target指的是image组件，而currentTarget指的是swiper组件
+        // var postid = event.currentTarget.dataset.postid;
+        var postid = event.target.dataset.postid;
+
+        wx.navigateTo({
+            //绝对路径
+            url: '/pages/post/post-detail/post-detail?postid=' + postid
+        });
+    },
+    onReTap:function(){
+        wx.switchTab({
+            url:"/pages/movies/movies",
+            
+        });
     }
 })
