@@ -1,17 +1,21 @@
 var postData = require('../../../data/post-data');
+var app = getApp();
 
 Page({
     data: {
         isMusicPlaying: false
     },
     onLoad: function (options) {
+        var globalData = app.globalData;
+
+        var that = this;
         var postid = options.postid;
         //保存文章id
-        this.data.postid = postid;
+        that.data.postid = postid;
         var data = postData.postList[postid];
 
         //绑定文章数据
-        this.setData(data);
+        that.setData(data);
 
         //通过缓存加载收藏状态
         var postsCollected = wx.getStorageSync('postsCollected');
@@ -19,6 +23,7 @@ Page({
         if (postsCollected) {
             //注意没有该postid的时候是undifine但undifine也等同于false
             postCollected = postsCollected[postid];
+
         } else {
             //没有缓存数据创建缓存数据
             postsCollected = {};
@@ -27,10 +32,50 @@ Page({
             wx.setStorageSync('postsCollected', postsCollected);
         }
 
+        if (postCollected == undefined) {
+            postCollected = false;
+        }
+
         //绑定收藏状态
-        this.setData({
+        that.setData({
             collected: postCollected
         });
+
+        if (globalData.g_isPlayingMusic && globalData.g_currentMusicPostId === that.data.postid) {
+            that.setData({
+                isMusicPlaying: true
+            });
+        }
+
+        that.onMusicMonitor();
+    },
+    onMusicMonitor: function () {
+        var that = this;
+        //监听音乐播放
+        wx.onBackgroundAudioPlay(function () {
+            //全局音乐播放ID必须等与当前页面ID
+            if (app.globalData.g_currentMusicPostId == that.data.postid) {
+                that.setData({
+                    isMusicPlaying: true
+                });
+            }
+            app.globalData.g_isPlayingMusic = true;
+        })
+        //监听音乐暂停 
+        wx.onBackgroundAudioPause(function () {
+            that.setData({
+                isMusicPlaying: false
+            });
+            app.globalData.g_isPlayingMusic = false;
+        })
+        //监听音乐停止
+        wx.onBackgroundAudioStop(function () {
+            that.setData({
+                isMusicPlaying: false
+            });
+            app.globalData.g_isPlayingMusic = false;
+            app.globalData.g_currentMusicPostId = null;
+        })
     },
     onCollectionTap: function (event) {
         this.getPostCollectedSyc();
@@ -128,22 +173,27 @@ Page({
         wx.clearStorageSync();
     },
     onMusicTap: function () {
+        var postid = this.data.postid;
+        //设置全局音乐播放ID
+        app.globalData.g_currentMusicPostId = this.data.postid;
         var isMusicPlaying = this.data.isMusicPlaying;
         if (isMusicPlaying) {
             wx.pauseBackgroundAudio();
             isMusicPlaying = false;
         } else {
             wx.playBackgroundAudio({
-                dataUrl: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-                title: '此时此刻-许巍',
-                coverImgUrl: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
+                dataUrl: postData.postList[postid].music.dataUrl,
+                title: postData.postList[postid].music.title,
+                coverImgUrl: postData.postList[postid].music.coverImgUrl,
             });
             isMusicPlaying = true;
         }
 
         //不能更改UI层的数据
         // this.data.isMusicPlaying = isMusicPlaying;
-        
-        this.setData({isMusicPlaying:isMusicPlaying});
+
+        this.setData({
+            isMusicPlaying: isMusicPlaying
+        });
     }
 });

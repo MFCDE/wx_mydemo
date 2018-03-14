@@ -13,7 +13,7 @@
         <view class="post-like">
             <image class="post-like-image" src="/images/icon/chat.png"></image>
             <text class="post-like-font">{{reading}}</text>
-            <image class="post-like-image" src="../../images/icon/view.png"></image>
+            <image class="post-like-image" src="/images/icon/view.png"></image>
             <text class="post-like-font">{{collection}}</text>
         </view>
     </view>
