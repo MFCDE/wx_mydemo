@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/movies/movies",
         "pages/post/post",
         "pages/welcome/welcome",
-        "pages/post/post-detail/post-detail",
-        "pages/movies/movies"
+        "pages/post/post-detail/post-detail"
     ],
     "window": {
         "navigationBarBackgroundColor": "405f80"
