@@ -1,7 +1,13 @@
 <import src="move-list-template/move-list-template.wxml" />
 
-<view>
-    <template is="moveListTemplate" data="" />
-    <template is="moveListTemplate" data="" />
-    <template is="moveListTemplate" data="" />
+<view class="container">
+    <view class="movies-template">
+        <template is="moveListTemplate" data="{{readyData}}" />
+    </view>
+    <view class="movies-template">
+        <template is="moveListTemplate" data="" />
+    </view>
+    <view class="movies-template">
+        <template is="moveListTemplate" data="" />
+    </view>
 </view>

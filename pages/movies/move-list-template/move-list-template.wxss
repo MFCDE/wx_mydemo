@@ -1,5 +1,4 @@
 @import "../move-template/move-template.wxss";
-
 .movie-list-container {
     display: flex;
     flex-direction: column;
@@ -12,6 +11,10 @@
 
 .movie-head {
     padding: 30rpx 20rpx 22rpx;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; */
 }
 
 .slogan {

@@ -11,9 +11,9 @@
                 </view>
             </view>
             <view class="movies-container">
-                <template is="moveTemplate" data="" />
-                <template is="moveTemplate" data="" />
-                <template is="moveTemplate" data="" />
+                <template is="moveTemplate" data="{{...moviesList}}" />
+                <template is="moveTemplate" data="{{...moviesList}}" />
+                <template is="moveTemplate" data="{{...moviesList}}" />
             </view>
         </view>
     </view>
