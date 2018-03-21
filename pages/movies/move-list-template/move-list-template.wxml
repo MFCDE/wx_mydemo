@@ -11,9 +11,15 @@
                 </view>
             </view>
             <view class="movies-container">
-                <template is="moveTemplate" data="{{...moviesList}}" />
-                <template is="moveTemplate" data="{{...moviesList}}" />
-                <template is="moveTemplate" data="{{...moviesList}}" />
+                <block wx:for="{{movies}}" wx:key="id" wx:for-item="item">
+                    <template is="moveTemplate" data="{{...item}}" />
+                </block>
+                <!-- <block wx:for="{{comingSoon}}" wx:key="id" wx:for-item="item">
+                    <template is="moveTemplate" data="{{...item}}" />
+                </block>
+                <block wx:for="{{top250}}" wx:key="id" wx:for-item="item">
+                    <template is="moveTemplate" data="{{...item}}" />
+                </block> -->
             </view>
         </view>
     </view>

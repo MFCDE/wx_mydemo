@@ -2,8 +2,8 @@
 
 <template name="moveTemplate">
     <view class="move-container">
-        <image class="movie-img" src="{{images.large}}"></image>
+        <image class="movie-img" src="{{coverageUrl}}"></image>
         <text class="movie-title">{{title}}</text>
-        <template is="starsTemplate" data=""/>
+        <template is="starsTemplate" data="{{average}}"/>
     </view>
 </template>

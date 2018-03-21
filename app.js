@@ -2,8 +2,8 @@ App({
     globalData: {
         g_isPlayingMusic: false,
         g_currentMusicPostId: null,
-        g_doubanBase:"http://t.yushu.im"
-    },  
+        g_doubanBase: "http://t.yushu.im"
+    },
     onLaunch: function () {},
     onShow: function () {},
     onHide: function () {},
@@ -31,5 +31,15 @@ App({
         time2 = Date.parse(time2) / 1000;
         var time_ = time2 - time1;
         return (time_ / (3600 * 24));
+    },
+    /**
+     * 字符串截取函数,超过规定长度的用...代替
+     */
+    mubstr: function (str, length, start = 0) {
+        if (str.length > length) {
+            return str.substr(start, length) + '...';
+        } else {
+            return str;
+        }
     }
 })
