@@ -4,6 +4,8 @@
     <view class="move-container">
         <image class="movie-img" src="{{coverageUrl}}"></image>
         <text class="movie-title">{{title}}</text>
-        <template is="starsTemplate" data="{{average}}"/>
+        <template is="starsTemplate" data="{{...rating}}"/>
+        <!-- 另一种模板数据传递方法,可以用过来传递多个数据 -->
+        <!-- <template is="starsTemplate" data="{{stars:stars,score:average}}"></template> -->
     </view>
 </template>

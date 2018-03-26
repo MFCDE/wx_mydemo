@@ -1,8 +1,9 @@
+var util = require('../../utils/utils.js');
 var app = getApp();
 
 Page({
     data: {
-        readyData: {}
+        // readyData: {}
     },
     onLoad: function (options) {
         var that = this;
@@ -13,10 +14,13 @@ Page({
 
         inTeaters.url = app.globalData.g_doubanBase + "/v2/movie/in_theaters" + "?start=0&count=3";
         inTeaters.key = "theaters";
+        inTeaters.category = '正在热映';
         comingSoon.url = app.globalData.g_doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3";
         comingSoon.key = "comingSoon";
+        comingSoon.category = '即将上映';
         top250.url = app.globalData.g_doubanBase + "/v2/movie/top250?" + "start=0&count=3";
         top250.key = "top250";
+        top250.category = 'Top250';
 
         inTeaters.data = wx.getStorageSync('theaters').movies;
         comingSoon.data = wx.getStorageSync('comingSoon').movies;
@@ -83,25 +87,35 @@ Page({
     /**
      * douban
      */
-    assignData: function (douban,updataDay = 0) {
+    assignData: function (douban, updataDay = 0) {
         var that = this;
-        var date = app.formatDate(new Date());
+        var date = util.formatDate(new Date());
 
         if (!douban.data) {
+            //如果缓存里没有数据则去请求数据
             that.getMovieListData(douban, date);
         } else {
             var lastDate = douban.time;
-            var nowDate = app.formatDate(new Date());
+            var nowDate = util.formatDate(new Date());
 
-            var day = app.dayDiff(lastDate, nowDate);
-
+            var day = util.dayDiff(lastDate, nowDate);
+            //如果超过1天（这里1天不是24小时是日期）则重新获取数据
             if (updataDay > 0) {
                 that.getMovieListData(douban, nowDate);
             } else {
-                that.data.readyData[douban.key] = {
-                    movies: douban.data
+                //不超过一天从缓存里获取数据
+                // that.data.readyData[douban.key] = {
+                //     movies: douban.data
+                // };
+                // that.setData(that.data.readyData);
+
+                //不超过一天从缓存里获取数据
+                var readyDate = {};
+                readyDate[douban.key] = {
+                    movies: douban.data,
+                    category:douban.category
                 };
-                that.setData(that.data.readyData);
+                that.setData(readyDate);
             }
         }
     },
@@ -135,31 +149,57 @@ Page({
         var movies = [];
         for (var idx in moviesDouban.subjects) {
             var subject = moviesDouban.subjects[idx];
-            var title = app.mubstr(subject.title, 5);
+            //标题长度超过5用...替代
+            var title = util.mubstr(subject.title, 5);
+            //将星星转换成数组形式
+            var stars = util.convertToStarsArray(subject.rating.stars, 5);
 
+            //页面需要绑定的数据
             var temp = {
                 title: title,
-                average: subject.rating.average,
                 coverageUrl: subject.images.large,
-                movieId: subject.id
+                movieId: subject.id,
+                rating: {
+                    stars: stars,
+                    average: subject.rating.average,
+                }
             }
 
             movies.push(temp);
         }
 
         //这个douban.key相当于readyData的属性，可以用数组写法实现对象的形式
-        that.data.readyData[douban.key] = {
-            movies: movies
+        // that.data.readyData[douban.key] = {
+        //     movies: movies
+        // };
+
+        //这个douban.key相当于readyData的属性，可以用数组写法实现对象的形式
+        var readyDate = {};
+        readyDate[douban.key] = {
+            movies: movies,
+            category:douban.category
         };
 
         that.setData(
             //这里不会覆盖不同的，相当与在data里展开
-            that.data.readyData
+            // that.data.readyData
+            readyDate
         );
 
         wx.setStorageSync(douban.key, {
             movies: movies,
+            category:douban.category,
             time: time
         });
     },
+    //点击跳转到更多页面
+    onMoreTap:function(event){
+        var categoryTitle = event.currentTarget.dataset.category;
+        
+        
+        // //跳转到子页面
+        // wx.navigateTo({
+        //     url:"more-movie/more-movie?id=1"      
+        // });
+    }
 })
