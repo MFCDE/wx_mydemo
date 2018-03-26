@@ -194,12 +194,12 @@ Page({
     },
     //点击跳转到更多页面
     onMoreTap:function(event){
+        //得到data-参数
         var categoryTitle = event.currentTarget.dataset.category;
         
-        
-        // //跳转到子页面
-        // wx.navigateTo({
-        //     url:"more-movie/more-movie?id=1"      
-        // });
+        //跳转到子页面，传递category，在move-more页面接收  
+        wx.navigateTo({
+            url:"more-movie/more-movie?category=" + categoryTitle      
+        });
     }
 })
