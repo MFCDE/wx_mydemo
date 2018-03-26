@@ -31,8 +31,7 @@ Page({
         //     that.data.readyData
         // );
 
-        console.log(that.data.readyData);
-
+        console.log(that.data);
 
         // wx.request({
         //     url: 'http://t.yushu.im/v2/movie/top250',
