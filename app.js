@@ -8,5 +8,4 @@ App({
     onShow: function () {},
     onHide: function () {},
     onError: function (msg) {},
-   
 })

@@ -55,9 +55,36 @@ function mubstr(str, length, start = 0) {
     }
 }
 
+/**
+ * 微信的request请求
+ * @param {请求地址} url 
+ * @param {success里的回调函数} callBack 
+ */
+function http(url, callBack) {
+    wx.request({
+        url: url,
+        data: {},
+        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        // header: {}, // 设置请求的 header
+        header: {
+            'Content-Type': 'application/json'
+        },
+        success: function (res) {
+            callBack(res.data);
+        },
+        fail: function () {
+            // fail
+        },
+        complete: function () {
+            // complete
+        }
+    })
+}
+
 module.exports = {
     convertToStarsArray: convertToStarsArray,
-    formatDate:formatDate,
-    dayDiff:dayDiff,
-    mubstr:mubstr
+    formatDate: formatDate,
+    dayDiff: dayDiff,
+    mubstr: mubstr,
+    http:http
 };

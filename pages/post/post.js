@@ -1,9 +1,7 @@
 var postsData = require('../../data/post-data');
 
 Page({
-    data: {
-
-    },
+    data: {},
     onLoad: function (options) {
         // 生命周期函数--监听页面加载
         // var posts_content = [
@@ -50,6 +48,7 @@ Page({
     },
     onUnload: function () {
         // 生命周期函数--监听页面卸载
+
     },
     onPullDownRefresh: function () {
         // 页面相关事件处理函数--监听用户下拉动作
@@ -70,8 +69,8 @@ Page({
 
         wx.navigateTo({
             //相对路径
-            url: 'post-detail/post-detail?postid=' + postid,
-        })
+            url: 'post-detail/post-detail?postid=' + postid
+        });
     },
     // onSwiperItemTap:function (event) {  
     //     var postid = event.currentTarget.dataset.postid;
@@ -92,10 +91,9 @@ Page({
             url: '/pages/post/post-detail/post-detail?postid=' + postid
         });
     },
-    onReTap:function(){
+    onReTap: function () {
         wx.switchTab({
-            url:"/pages/movies/movies",
-            
+            url: "/pages/movies/movies",
         });
     }
 })

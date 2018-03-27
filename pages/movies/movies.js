@@ -25,11 +25,11 @@ Page({
         inTeaters.data = wx.getStorageSync('theaters').movies;
         comingSoon.data = wx.getStorageSync('comingSoon').movies;
         top250.data = wx.getStorageSync('top250').movies;
-
+		
         that.assignData(inTeaters);
         that.assignData(comingSoon);
         that.assignData(top250);
-
+		
         //不能写在这里，assignData()里是有异步方法的，必须放到异步成功后的回调函数里
         // that.setData(
         //     that.data.readyData
@@ -113,7 +113,7 @@ Page({
                 var readyDate = {};
                 readyDate[douban.key] = {
                     movies: douban.data,
-                    category:douban.category
+                    category: douban.category
                 };
                 that.setData(readyDate);
             }
@@ -122,6 +122,7 @@ Page({
     //获取电影数据
     getMovieListData: function (douban, time) {
         var that = this;
+        // util.http(douban.url, that.processDoubanData);
         wx.request({
             url: douban.url,
             data: {},
@@ -177,7 +178,7 @@ Page({
         var readyDate = {};
         readyDate[douban.key] = {
             movies: movies,
-            category:douban.category
+            category: douban.category
         };
 
         that.setData(
@@ -188,18 +189,19 @@ Page({
 
         wx.setStorageSync(douban.key, {
             movies: movies,
-            category:douban.category,
+            category: douban.category,
             time: time
         });
     },
     //点击跳转到更多页面
-    onMoreTap:function(event){
+    onMoreTap: function (event) {
         //得到data-参数
-        var categoryTitle = event.currentTarget.dataset.category;
-        
+        var category = event.currentTarget.dataset.category;
+
         //跳转到子页面，传递category，在move-more页面接收  
         wx.navigateTo({
-            url:"more-movie/more-movie?category=" + categoryTitle      
+            //注意=两边不要有空格
+            url: "more-movie/more-movie?category=" + category
         });
     }
 })

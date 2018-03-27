@@ -1,34 +1,88 @@
+var util = require('../../../utils/utils');
+var app = getApp();
+
 Page({
-    data:{
+    data: {
+        navigateTitle: "",
+        // movies: {}
     },
-    onLoad:function(options){
-        // 生命周期函数--监听页面加载
-        console.log(options);
-    },
-    onReady:function(){
-        // 生命周期函数--监听页面初次渲染完成
-    },
-    onShow:function(){
-        // 生命周期函数--监听页面显示
-    },
-    onHide:function(){
-        // 生命周期函数--监听页面隐藏
-    },
-    onUnload:function(){
-        // 生命周期函数--监听页面卸载
-    },
-    onPullDownRefresh: function() {
-        // 页面相关事件处理函数--监听用户下拉动作
-    },
-    onReachBottom: function() {
-        // 页面上拉触底事件的处理函数
-    },
-    onShareAppMessage: function() {
-        // 用户点击右上角分享
-        return {
-          title: 'title', // 分享标题
-          desc: 'desc', // 分享描述
-          path: 'path' // 分享路径
+    onLoad: function (options) {
+        var that = this;
+        var category = options.category;
+        this.data.navigateTitle = category;
+
+        var dataUrl = "";
+        switch (category) {
+            case '正在热映':
+                dataUrl = app.globalData.g_doubanBase + "/v2/movie/in_theaters";
+                break;
+            case '即将上映':
+                dataUrl = app.globalData.g_doubanBase + "/v2/movie/coming_soon";
+                break;
+            case 'Top250':
+                dataUrl = app.globalData.g_doubanBase + "/v2/movie/top250?";
+                break;
+            default:
+                break;
         }
+
+        util.http(dataUrl, that.processDoubanData);
+    },
+    onShow: function (event) {
+
+    },
+    onReady: function (event) {
+        var that = this;
+        wx.setNavigationBarTitle({
+            title: that.data.navigateTitle,
+            success: function (res) {
+                // success
+            }
+        })
+    },
+    onScrollLower: function () {
+        console.log(123);
+    },
+    processDoubanData: function (moviesDouban) {
+        var that = this;
+        // console.log(moviesDouban.subjects);
+
+        //重组成需要都豆瓣电影数据，只需要图片、标题
+        var movies = [];
+        for (var idx in moviesDouban.subjects) {
+            var subject = moviesDouban.subjects[idx];
+            //标题长度超过5用...替代
+            var title = util.mubstr(subject.title, 5);
+            //将星星转换成数组形式
+            var stars = util.convertToStarsArray(subject.rating.stars, 5);
+
+            //页面需要绑定的数据
+            var temp = {
+                title: title,
+                coverageUrl: subject.images.large,
+                movieId: subject.id,
+                rating: {
+                    stars: stars,
+                    average: subject.rating.average,
+                }
+            }
+
+            movies.push(temp);
+        }
+
+        //这个douban.key相当于readyData的属性，可以用数组写法实现对象的形式
+        // that.data.readyData[douban.key] = {
+        //     movies: movies
+        // };
+
+        that.setData(
+            //这里不会覆盖不同的，相当与在data里展开
+            // that.data.readyData
+            {movies: movies}
+        );
+
+        console.log(that.data.movies);
+
     }
-})
+});
+
