@@ -4,6 +4,8 @@ var app = getApp();
 Page({
     data: {
         // readyData: {}
+        searchMovies:{},
+        onShow: true
     },
     onLoad: function (options) {
         var that = this;
@@ -25,11 +27,11 @@ Page({
         inTeaters.data = wx.getStorageSync('theaters').movies;
         comingSoon.data = wx.getStorageSync('comingSoon').movies;
         top250.data = wx.getStorageSync('top250').movies;
-		
+
         that.assignData(inTeaters);
         that.assignData(comingSoon);
         that.assignData(top250);
-		
+
         //不能写在这里，assignData()里是有异步方法的，必须放到异步成功后的回调函数里
         // that.setData(
         //     that.data.readyData
@@ -191,7 +193,7 @@ Page({
             movies: movies,
             category: douban.category,
             time: time
-        }); 
+        });
     },
     //点击跳转到更多页面
     onMoreTap: function (event) {
@@ -204,7 +206,10 @@ Page({
             url: "more-movie/more-movie?category=" + category
         });
     },
-    onBindFocus:function (event) {
-        console.log(123);
+    onBindFocus: function (event) {
+        //this.data.onShow = true;
+        this.setData({onShow: false});
+        // this.setData({yoo:true});
+
     },
 })

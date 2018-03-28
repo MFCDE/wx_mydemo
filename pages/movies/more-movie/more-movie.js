@@ -132,7 +132,6 @@ Page({
         that.data.totalCount += 20;
 
         console.log(that.data.movies);
-
     }
 });
 
