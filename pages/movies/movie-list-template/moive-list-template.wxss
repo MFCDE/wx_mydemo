@@ -1,4 +1,5 @@
-@import "../move-template/move-template.wxss";
+@import "../movie-template/movie-template.wxss";
+
 .movie-list-container {
     display: flex;
     flex-direction: column;

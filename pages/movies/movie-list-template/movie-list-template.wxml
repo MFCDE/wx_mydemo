@@ -1,6 +1,6 @@
-<import src="../move-template/move-template.wxml" />
+<import src="../movie-template/movie-template.wxml" />
 
-<template name="moveListTemplate">
+<template name="movieListTemplate">
     <view class="movie-list-container">
         <view class="inner-container">
             <view class="movie-head">
@@ -12,7 +12,7 @@
             </view>
             <view class="movies-container">
                 <block wx:for="{{movies}}" wx:key="id" wx:for-item="item">
-                    <template is="moveTemplate" data="{{...item}}" />
+                    <template is="movieTemplate" data="{{...item}}" />
                 </block>
                 <!-- <block wx:for="{{comingSoon}}" wx:key="id" wx:for-item="item">
                     <template is="moveTemplate" data="{{...item}}" />

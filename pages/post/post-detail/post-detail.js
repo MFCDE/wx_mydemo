@@ -169,7 +169,7 @@ Page({
         });
     },
     onShareTap: function (event) {
-        // wx.removeStorageSync('key');
+        // wx.removieStorageSync('key');
         wx.clearStorageSync();
     },
     onMusicTap: function () {

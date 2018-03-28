@@ -1,4 +1,4 @@
-@import "../move-template/move-template.wxss";
+@import "../movie-template/movie-template.wxss";
 
 .grid-container{
     margin: 40rpx 0rpx 40rpx 6rpx;

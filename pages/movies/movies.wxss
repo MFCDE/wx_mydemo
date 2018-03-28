@@ -1,4 +1,4 @@
-@import "move-list-template/move-list-template.wxss";
+@import "movie-list-template/moive-list-template.wxss";
 
 .container{
     background-color: #f2f2f2;

@@ -3,15 +3,17 @@ var app = getApp();
 
 Page({
     data: {
-        navigateTitle: "",
-        dataUrl: '',
-        start: 0,
-        count: 20,
-        // movies: {}
+        navigateTitle: "",    //导航栏标题
+        reuqestUrl: '',      //请求地址
+        totalCount: 0,      //请求总数，即当前start开始位置
+        movies: {},         //绑定数据
+        isEmpty: true,      //movies是否为空，是否是第一次请求数据
     },
     onLoad: function (options) {
         var that = this;
+        //获取哪一种类型的标题
         var category = options.category;
+        //设置当前导航栏的标题
         this.data.navigateTitle = category;
 
         var dataUrl = "";
@@ -30,7 +32,9 @@ Page({
                 break;
         }
 
-        that.data.dataUrl = dataUrl;
+        //设置当前请求url
+        that.data.reuqestUrl = dataUrl;
+        //第一次请求数据并绑定
         util.http(dataUrl, that.processDoubanData);
     },
     onShow: function (event) {
@@ -38,6 +42,7 @@ Page({
     },
     onReady: function (event) {
         var that = this;
+        //动态改变当前导航栏的标题
         wx.setNavigationBarTitle({
             title: that.data.navigateTitle,
             success: function (res) {
@@ -46,12 +51,10 @@ Page({
         })
     },
     onScrollLower: function () {
-        this.data.count += this.data.count;
-        var url = this.data.dataUrl + '?start=' + this.data.start + '&count=' + this.data.count;
-        util.http(url, this.processDoubanData);
-        // this.data.start = this.data.count;
-        // this.data.count += 20;
-        console.log(url);
+        //下一次请求的URL地址和参数
+        var nextUrl = this.data.reuqestUrl + '?start=' + this.data.totalCount + '&count=20';
+        util.http(nextUrl, this.processDoubanData);
+        console.log(nextUrl);
     },
     processDoubanData: function (moviesDouban) {
         var that = this;
@@ -85,11 +88,25 @@ Page({
         //     movies: movies
         // };
 
+        //如果要绑定新加载的数据，那么需要同旧的数据合并在一起
+        //这里注意每次都是请求20条，但要数据绑定的是上次的所有数据加上这次请求来的
+        var totalMovies = {};
+        //判断以前是否请求过数据
+        if (!that.data.isEmpty) {
+            totalMovies = that.data.movies.concat(movies);
+        } else {
+            totalMovies = movies;
+            that.data.isEmpty = false;
+        }
+        // movies = that.data.movies.concat(movies);
         that.setData(
             //这里不会覆盖不同的，相当与在data里展开
             // that.data.readyData
-            {movies: movies}
+            {movies: totalMovies}
         );
+
+        //新请求数据的开始位置=所有请求过的数量，即新请求的开始位置=上次请求的数量
+        that.data.totalCount += 20;
 
         console.log(that.data.movies);
 
