@@ -4,6 +4,9 @@ var app = getApp();
 Page({
     data: {
         navigateTitle: "",
+        dataUrl: '',
+        start: 0,
+        count: 20,
         // movies: {}
     },
     onLoad: function (options) {
@@ -12,6 +15,7 @@ Page({
         this.data.navigateTitle = category;
 
         var dataUrl = "";
+
         switch (category) {
             case '正在热映':
                 dataUrl = app.globalData.g_doubanBase + "/v2/movie/in_theaters";
@@ -20,12 +24,13 @@ Page({
                 dataUrl = app.globalData.g_doubanBase + "/v2/movie/coming_soon";
                 break;
             case 'Top250':
-                dataUrl = app.globalData.g_doubanBase + "/v2/movie/top250?";
+                dataUrl = app.globalData.g_doubanBase + "/v2/movie/top250";
                 break;
             default:
                 break;
         }
 
+        that.data.dataUrl = dataUrl;
         util.http(dataUrl, that.processDoubanData);
     },
     onShow: function (event) {
@@ -41,7 +46,12 @@ Page({
         })
     },
     onScrollLower: function () {
-        console.log(123);
+        this.data.count += this.data.count;
+        var url = this.data.dataUrl + '?start=' + this.data.start + '&count=' + this.data.count;
+        util.http(url, this.processDoubanData);
+        // this.data.start = this.data.count;
+        // this.data.count += 20;
+        console.log(url);
     },
     processDoubanData: function (moviesDouban) {
         var that = this;
