@@ -191,7 +191,7 @@ Page({
             movies: movies,
             category: douban.category,
             time: time
-        });
+        }); 
     },
     //点击跳转到更多页面
     onMoreTap: function (event) {
@@ -203,5 +203,8 @@ Page({
             //注意=两边不要有空格
             url: "more-movie/more-movie?category=" + category
         });
-    }
+    },
+    onBindFocus:function (event) {
+        console.log(123);
+    },
 })

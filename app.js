@@ -7,5 +7,5 @@ App({
     onLaunch: function () {},
     onShow: function () {},
     onHide: function () {},
-    onError: function (msg) {},
+    onError: function (msg) {}
 })

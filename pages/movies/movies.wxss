@@ -7,3 +7,29 @@
 .movies-template{
     margin-bottom: 30rpx;
 }
+
+.search {
+    display: flex;
+    flex-direction: row;
+    height: 80 rpx;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+.search-img{
+    margin:auto 0rpx auto 20rpx;
+}
+
+/*input的placeholder属性样式设置placeholder-class */
+.placeholder{
+    font-size: 14px;
+    color:#d1d1d1;
+    margin-left: 20rpx;
+}
+
+.search input{
+    height: 100%;
+    width: 600 rpx;
+    margin-left: 20rpx;
+    font-size: 28rpx;
+}

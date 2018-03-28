@@ -50,12 +50,31 @@ Page({
             }
         })
     },
-    onScrollLower: function () {
+    // onScrollLower: function () {
+    //     //下一次请求的URL地址和参数
+    //     var nextUrl = this.data.reuqestUrl + '?start=' + this.data.totalCount + '&count=20';
+    //     wx.showNavigationBarLoading();
+    //     util.http(nextUrl, this.processDoubanData);
+    //     console.log(nextUrl);
+    // },
+    //当页面滑倒最低端的时候触发，用来代替scroll-view下拉（上滑）加载更多的bindscrolltolower方法
+    onReachBottom: function () {
         //下一次请求的URL地址和参数
         var nextUrl = this.data.reuqestUrl + '?start=' + this.data.totalCount + '&count=20';
+        wx.showNavigationBarLoading();
         util.http(nextUrl, this.processDoubanData);
         console.log(nextUrl);
     },
+    //下拉刷新触发的方法
+    onPullDownRefresh:function(){
+        var refreshUrl = this.data.reuqestUrl + '?start=0&count=20';
+        this.data.movies = {};
+        this.data.isEmpty = true;
+        this.data.totalCount = 0;
+        wx.showNavigationBarLoading();
+        util.http(refreshUrl, this.processDoubanData);
+    },
+    //绑定数据方法
     processDoubanData: function (moviesDouban) {
         var that = this;
         // console.log(moviesDouban.subjects);
@@ -104,7 +123,11 @@ Page({
             // that.data.readyData
             {movies: totalMovies}
         );
-
+        // console.log(totalMovies);
+        //绑定数据完成隐藏加载动画
+        wx.hideNavigationBarLoading();
+        //绑定数据完成停止下拉刷新
+        wx.stopPullDownRefresh();
         //新请求数据的开始位置=所有请求过的数量，即新请求的开始位置=上次请求的数量
         that.data.totalCount += 20;
 
