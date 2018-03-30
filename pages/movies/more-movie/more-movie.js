@@ -66,7 +66,7 @@ Page({
         console.log(nextUrl);
     },
     //下拉刷新触发的方法
-    onPullDownRefresh:function(){
+    onPullDownRefresh: function () {
         var refreshUrl = this.data.reuqestUrl + '?start=0&count=20';
         this.data.movies = {};
         this.data.isEmpty = true;
@@ -132,6 +132,13 @@ Page({
         that.data.totalCount += 20;
 
         console.log(that.data.movies);
-    }
+    },
+    //点击跳转到电影详情页
+    onMovieTap: function (event) {
+        var movieid = event.currentTarget.dataset.movieid;
+        wx.navigateTo({
+            url: '/pages/movies/movie-detail/movie-detail?id=' + movieid
+        })
+    },
 });
 

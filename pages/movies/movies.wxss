@@ -12,7 +12,7 @@
 .search {
     display: flex;
     flex-direction: row;
-    height: 80 rpx;
+    height: 80rpx;
     width: 100%;
     background-color: #f2f2f2;
 }
@@ -30,7 +30,18 @@
 
 .search input{
     height: 100%;
-    width: 600 rpx;
+    width: 600rpx;
     margin-left: 20rpx;
     font-size: 28rpx;
+}
+
+.search-pannel{
+    position: absolute;
+    top:80rpx;
+}
+
+.xx-img{
+    height: 30rpx;
+    width: 30rpx;
+    margin: auto 0 auto 10rpx;
 }
