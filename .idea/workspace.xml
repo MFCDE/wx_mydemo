@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e438c054-55e8-45f9-b42d-10d5e797d1ab" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/movies/more-movie/more-movie.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/movies/more-movie/more-movie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/movies/movie-template/movie-template.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/movies/movie-template/movie-template.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/movies/movies.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/movies/movies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/movies/movies.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/movies/movies.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/movies/movies.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/movies/movies.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/post.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/post.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.js" afterDir="false" />
-    </list>
+    <list default="true" id="e438c054-55e8-45f9-b42d-10d5e797d1ab" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +28,8 @@
       <file leaf-file-name="movie-detail.wxss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/movies/movie-detail/movie-detail.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+            <state relative-caret-position="696">
+              <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -190,7 +180,7 @@
     <property name="eslint.code.style.apply.dismiss" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.10.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PHP/bick1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wechatform" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -278,11 +268,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84158000" />
+    <option name="totallyTimeSpent" value="84658000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Key Promoter X" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15729167" />
@@ -660,8 +649,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/movies/movie-detail/movie-detail.wxss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        <state relative-caret-position="696">
+          <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
         </state>
       </provider>
     </entry>
